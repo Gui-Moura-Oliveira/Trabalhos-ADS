@@ -1,0 +1,69 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <time.h>
+
+double benchmark(int flag);
+
+int main()
+{
+
+    double tempo;
+    long long ra = 2200218250000, i, divisor, resposta = 0, array[10000], cont = 0;
+
+    srand(time(NULL));
+    benchmark(1);
+
+    for (i = 1; i <= ra / 2; i++)
+    {
+        if (ra % i == 0)
+        {
+            if (i < ra / 2)
+            {
+                printf("%lld ", i);
+
+                divisor = i;
+                if (resposta == divisor)
+                {
+                    /*  printf("MEIO %ld \n", resposta); */
+                    break;
+                }
+
+                divisor = i;
+                resposta = ra / i;
+
+                array[cont] = resposta;
+                cont++;
+            }
+        }
+    }
+    cont = cont - 2;
+
+    for (i = 0; i < cont; cont--)
+    {
+        printf("%lld ", array[cont]);
+    }
+    printf("%lld ", ra);
+
+    printf("\n");
+    tempo = benchmark(0);
+    printf("Tempo = %lf\n", tempo);
+}
+
+double benchmark(int flag)
+{
+    static clock_t inicio;
+    clock_t fim;
+    double tempo = 0;
+
+    if (flag)
+    {
+        inicio = clock();
+    }
+    else
+    {
+        fim = clock();
+        tempo = (double)(fim - inicio) / CLOCKS_PER_SEC;
+    }
+
+    return tempo;
+}

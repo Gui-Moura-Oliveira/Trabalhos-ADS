@@ -36,7 +36,7 @@ int main()
             }
         }
     }
-    cont = cont - 2;
+    cont = cont - 1;
 
     for (i = 0; i < cont; cont--)
     {

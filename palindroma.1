@@ -1,0 +1,47 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdbool.h>
+
+bool verificaP(char palavra[]);
+
+int main()
+{
+    // strrev reverte a string  ex:  printf("After reversing string is =%s",strrev(str));
+    char palavra[30];
+
+    printf("Digite uma palavra: ");
+    scanf("%s", palavra);
+
+        if (verificaP(palavra) == 0)
+    {
+        printf("Palindroma.");
+        return true;
+    }
+
+    else
+    {
+        printf("Nao e  um palindroma.");
+        return false;
+    }
+}
+
+bool verificaP(char palavra[])
+{
+
+    int i, tam, diferentes = 0;
+
+    tam = strlen(palavra);
+    tam--; // último índice válido da string (vetor)
+    i = 0; // primeiro índice válido da string (vetor)
+
+    while (tam >= i)
+    {
+        if (palavra[i] != palavra[tam]) // conta as letras diferentes
+            diferentes++;
+        i++;
+        tam--;
+    }
+
+    return diferentes;
+}

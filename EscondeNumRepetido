@@ -1,0 +1,34 @@
+#include <stdlib.h>
+#include <stdio.h>
+
+int main(void)
+{
+
+    int num[20], i, tam = sizeof(num) / sizeof(int), ii, iii = 0, saida[20];
+
+    for (i = 0; i < 20; i++)
+    {
+        printf("%d numero so sera imprimido 1x: ", i + 1);
+        scanf("%d", &num[i]);
+    }
+
+    for (i = 0; i < tam; i++)
+    {
+        for (ii = 0; ii < iii; ii++)
+        {
+            if (num[i] == saida[ii])
+                break;
+        }
+
+        if (ii == iii)
+        {
+            saida[iii] = num[i];
+            iii++;
+        }
+    }
+
+    for (i = 0; i < iii; i++)
+        printf("%d ", saida[i]);
+
+    return 0;
+}

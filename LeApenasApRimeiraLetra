@@ -1,0 +1,56 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main(void)
+{
+
+    int i, j = 0, k;
+    FILE *file;
+    fopen_s(&file, "aula.txt", "r");
+
+    // vendo se o aruivo existe
+    if (file == NULL)
+    {
+        printf("Erro na abertura do arquivo!");
+        return 0;
+    }
+
+    // lendo linha por linha
+    const size_t tam_Linha = 300;
+    char *frase = malloc(tam_Linha);
+    while (fgets(frase, tam_Linha, file) != NULL)
+    {
+        /*  printf(frase); */
+    }
+
+    printf("\n");
+
+    if (frase[0] == 'a' || frase[0] == 'A') /* resolvendo bug que nao acha a primeira palavra se nao tiver um espaco antes */
+    {
+        for (k = 0; frase[k] != ' '; k++)
+        {
+            printf("%c", frase[k]);
+        }
+    }
+    printf(" ");
+
+    for (i = 0; i < strlen(frase); i++)
+    {
+        if (frase[i - 1] == ' ' && (frase[i] == 'a' || frase[i] == 'A'))
+        {
+
+            for (j = i; frase[j] != ' ' && j < strlen(frase); j++)
+            {
+                printf("%c", frase[j]);
+            }
+
+            i = j;
+            printf(" ");
+        }
+    }
+
+    fclose(file);
+
+    free(frase); // limpando a heap memory por ter usado o comando malloc
+}

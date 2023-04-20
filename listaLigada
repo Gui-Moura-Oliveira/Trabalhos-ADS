@@ -1,0 +1,64 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct tipo_no
+{
+    int num;
+    struct tipo_no *prox;
+};
+
+void mostraLista(struct tipo_no *parm);
+struct tipo_no *insereNo(struct tipo_no **parm);
+
+int main(void)
+{
+    int pos, numero, ret;
+    struct tipo_no *head = NULL, *nova, *nova2;
+
+    for (pos = 0; pos < 12; pos++)
+    {
+
+        nova = insereNo(&head);
+        nova2 = insereNo(&head);
+
+        printf("Digite o %d(o) RA: ", pos + 1);
+        scanf("%d", &(nova->num));
+
+        printf("Digite a %d(a) nota: ", pos + 1);
+        scanf("%d", &(nova2->num));
+        printf("\n");
+    }
+
+    mostraLista(head);
+}
+
+struct tipo_no *insereNo(struct tipo_no **parm)
+{
+    struct tipo_no *nova;
+    if (!(nova = malloc(sizeof(struct tipo_no))))
+    {
+        printf("Falta de memoria! \n");
+        exit(1);
+    }
+    nova->prox = *parm; // Insere novo no na lista ligada
+    *parm = nova;
+    return nova;
+}
+void mostraLista(struct tipo_no *parm)
+{
+    int aux = 2;
+    while (parm != NULL)
+    {
+
+        if (aux % 2 == 0)
+        {
+            printf("Nota do %d(o) aluno. \n", parm->num);
+            parm = parm->prox;
+        }
+        else
+        {
+            printf("RA do %d(o) aluno. \n", parm->num);
+            parm = parm->prox;
+        }
+        aux++;
+    }
+}
